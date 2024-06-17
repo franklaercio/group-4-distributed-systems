@@ -1,0 +1,30 @@
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    volumes:
+      - ./compose/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./compose/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  #  spring-app:
+  #    build:
+  #      context: .
+  #    depends_on:
+  #      - rabbitmq
+  #      - api1
+  #      - api2
+  #    ports:
+  #      - "8080:8080"
+
+  mockserver:
+    image: mockserver/mockserver:latest
+    ports:
+      - 1080:1080
+    environment:
+      MOCKSERVER_WATCH_INITIALIZATION_JSON: "true"
+      MOCKSERVER_PROPERTY_FILE: ./config/mockserver.properties
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /initializer.json
+    volumes:
+      - ./compose/initializer.json:/initializer.json

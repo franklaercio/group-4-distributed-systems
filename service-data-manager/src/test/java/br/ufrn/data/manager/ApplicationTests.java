@@ -1,10 +1,10 @@
-package br.ufrn.data;
+package br.ufrn.data.manager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DataApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

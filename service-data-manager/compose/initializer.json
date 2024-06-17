@@ -1,0 +1,62 @@
+[
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/cache"
+    },
+    "httpResponse": {
+      "body": {
+        "key": "f3a70518-2309-457b-93ec-45e56fd030a1"
+      },
+      "statusCode": 200
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/v1/socrata"
+    },
+    "httpResponse": {
+      "body": {
+        "id": "f3a70518-2309-457b-93ec-45e56fd030a1",
+        "database": "SOCRATA",
+        "data": {
+          "description": "This is a test dataset of SOCRATA"
+        }
+      },
+      "statusCode": 200
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/v1/ckan"
+    },
+    "httpResponse": {
+      "body": {
+        "id": "f3a70518-2309-457b-93ec-45e56fd030a1",
+        "database": "CKAN",
+        "data": {
+          "description": "This is a test dataset of CKAN"
+        }
+      },
+      "statusCode": 200
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/v1/dkan"
+    },
+    "httpResponse": {
+      "body": {
+        "id": "f3a70518-2309-457b-93ec-45e56fd030a1",
+        "database": "DKAN",
+        "data": {
+          "description": "This is a test dataset of DKAN"
+        }
+      },
+      "statusCode": 200
+    }
+  }
+]
