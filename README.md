@@ -40,7 +40,7 @@ O repositório do projeto está organizado da seguinte forma:
 
 Para executar o projeto, você precisará dos seguintes pré-requisitos:
 
-- [Linguagem de Programação Utilizada Java)](https://www.java.com/): Certifique-se de ter a versão adequada instalada, verifique no arquivo `pom.xml`.
+- [Linguagem de Programação Utilizada Java](https://www.java.com/): Certifique-se de ter a versão adequada instalada, verifique no arquivo `pom.xml`.
 - [Bibliotecas e Dependências](https://www.example.com/): Instale todas as bibliotecas necessárias listadas no arquivo `pom.xml`.
 
 ## Instalação
