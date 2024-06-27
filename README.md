@@ -11,15 +11,15 @@ Nesta seção, incluímos diagramas que ajudam a entender a arquitetura e o flux
 
 ### Diagrama de Componentes
 
-![Diagrama de Componentes](docs/components.png)
+![Diagrama de Componentes](docs/diagrams/components.png)
 
 ### Diagrama de Sequência do Schedule
 
-![Diagrama de Sequência](docs/sequence-datamanager.png)
+![Diagrama de Sequência](docs/diagrams/sequence-datamanager.png)
 
 ### Diagrama de Sequência do Data Manager
 
-![Diagrama de Sequência](docs/sequence-schedule.png)
+![Diagrama de Sequência](docs/diagrams/sequence-schedule.png)
 
 ## Estrutura do Projeto
 
