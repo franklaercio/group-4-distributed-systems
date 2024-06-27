@@ -19,18 +19,18 @@ public class ScheduledTasks {
     @Scheduled(cron = "0 * * * * *") // every minute
     public void callCkan() throws ApiCallException {
         logger.info("Calling CKAN");
-        this.openDataService.callApi("/api/v1/ckan");
+        this.openDataService.callApi("/api/v1/opendata");
     }
 
     @Scheduled(cron = "0 * * * * *") // every minute
     public void callDkan() throws ApiCallException {
         logger.info("Calling DKAN");
-        this.openDataService.callApi("/api/v1/dkan");
+        this.openDataService.callApi("/api/v1/opendata");
     }
 
     @Scheduled(cron = "0 * * * * *") // every minute
     public void callSocrata() throws ApiCallException {
         logger.info("Calling Socrata");
-        this.openDataService.callApi("/api/v1/socrata");
+        this.openDataService.callApi("/api/v1/opendata");
     }
 }

@@ -35,33 +35,19 @@ public class DataSynchronizationService implements OpenDataRepository {
     }
 
     @Override
-    public OpenData syncCkan() {
-        return syncData(openDataAccessClient::getCkanData, messageQueueProperties.getCkanQueueName());
-    }
+    public OpenData sync(String datasource) {
+        logger.info("Starting data synchronization for: {}", datasource);
 
-    @Override
-    public OpenData syncDkan() {
-        return syncData(openDataAccessClient::getDkanData, messageQueueProperties.getDkanQueueName());
-    }
-
-    @Override
-    public OpenData syncSocrata() {
-        return syncData(openDataAccessClient::getSocrataData, messageQueueProperties.getSocrataQueueName());
-    }
-
-    private OpenData syncData(Supplier<OpenData> dataSupplier, String queueName) {
-        logger.info("Starting data synchronization for: {}", dataSupplier.get());
-
-        OpenData accessDataResponse = dataSupplier.get();
-        logger.info("Data fetched successfully for: {}", dataSupplier.get());
+        OpenData accessDataResponse = this.openDataAccessClient.getData(datasource);
+        logger.info("Data fetched successfully for: {}", datasource);
 
         ResponseEntity<Void> cacheResponse = cacheClient.createCache(accessDataResponse);
         if (!cacheResponse.getStatusCode().is2xxSuccessful()) {
-            logger.error("Failed to create cache for: {}", dataSupplier.get());
-            throw new CacheCreationException("Failed to create cache for: " + dataSupplier);
+            logger.error("Failed to create cache for: {}", datasource);
+            throw new CacheCreationException("Failed to create cache for: " + datasource);
         }
 
-        logger.info("Data cached successfully for: {}", dataSupplier.get());
+        logger.info("Data cached successfully for: {}", datasource);
 
         messageRepository.send(queueName, accessDataResponse.getData());
         logger.info("Data sent to queue: {}", queueName);

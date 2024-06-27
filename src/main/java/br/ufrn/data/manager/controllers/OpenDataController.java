@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/opendata")
 public class OpenDataController {
 
     private final OpenDataRepository openDataRepository;
@@ -16,18 +16,8 @@ public class OpenDataController {
         this.openDataRepository = openDataRepository;
     }
 
-    @PostMapping("/ckan")
-    public ResponseEntity<?> syncCkanData() {
-        return ResponseEntity.ok().body(this.openDataRepository.syncCkan());
-    }
-
-    @PostMapping("/dkan")
-    public ResponseEntity<?> syncDkanData() {
-        return ResponseEntity.ok().body(this.openDataRepository.syncDkan());
-    }
-
-    @PostMapping("/socrata")
-    public ResponseEntity<?> syncSocrataData() {
-        return ResponseEntity.ok().body(this.openDataRepository.syncSocrata());
+    @GetMapping
+    public ResponseEntity<?> sync(@RequestParam String datasource) {
+        return ResponseEntity.ok().body(this.openDataRepository.sync(datasource));
     }
 }

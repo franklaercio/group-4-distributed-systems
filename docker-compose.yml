@@ -2,8 +2,8 @@ services:
   rabbitmq:
     image: "rabbitmq:3-management"
     volumes:
-      - ./compose/definitions.json:/etc/rabbitmq/definitions.json:ro
-      - ./compose/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./docs/compose/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./docs/compose/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -27,4 +27,4 @@ services:
       MOCKSERVER_PROPERTY_FILE: ./config/mockserver.properties
       MOCKSERVER_INITIALIZATION_JSON_PATH: /initializer.json
     volumes:
-      - ./compose/initializer.json:/initializer.json
+      - ./docs/compose/initializer.json:/initializer.json
