@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant DataManager
+    participant API
+    participant Cache
+    participant RabbitMQ
+
+    DataManager->>API: Solicita dados da base especificada
+    API-->>DataManager: Retorna dados
+    DataManager->>Cache: Salva dados no cache
+    alt Sucesso ao salvar no cache
+        Cache-->>DataManager: Dados salvos com sucesso
+        DataManager->>RabbitMQ: Envia mensagem para o tópico
+    else Erro ao salvar no cache
+        Cache-->>DataManager: Erro ao salvar dados
+        DataManager-->>DataManager: Lança erro
+    end

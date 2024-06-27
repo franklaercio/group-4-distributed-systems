@@ -1,0 +1,22 @@
+flowchart TB
+    DashStatic[[Dashboard Static]] --> |Consome| RabbitMQ
+    DashSituational[[Dashboard Situational]] --> |Consome| RabbitMQ
+    DashStatic[[Dashboard Static]] --> |Consome| GestorCache
+    DashSituational[[Dashboard Situational]] --> |Consome| GestorCache
+    SCHD[(Scheduler)] --> |Estimula| GestorDados
+    GestorDados([Gestor de Dados]) --> |Salva| GestorCache[(Gestor Cache)]
+    GestorDados --> |Envia Mensagens| RabbitMQ((RabbitMQ))
+    GestorDados --> |Comunica| GestorAcesso
+    GestorAcesso --> |Fornece Dados| CKAN[(CKAN)]
+    GestorAcesso --> |Fornece Dados| DKAN[(DKAN)]
+    GestorAcesso --> |Fornece Dados| SOCRATA[(SOCRATA)]
+    style GestorDados fill:#f9f,stroke:#333,stroke-width:2px
+    style GestorCache fill:#bbf,stroke:#333,stroke-width:2px
+    style GestorAcesso fill:#ff9,stroke:#333,stroke-width:2px
+    style CKAN fill:#ff9,stroke:#333,stroke-width:2px
+    style DKAN fill:#ff9,stroke:#333,stroke-width:2px
+    style SOCRATA fill:#ff9,stroke:#333,stroke-width:2px
+    style SCHD fill:#ff9,stroke:#333,stroke-width:2px
+    style DashStatic fill:#9f9,stroke:#333,stroke-width:2px
+    style DashSituational fill:#9f9,stroke:#333,stroke-width:2px
+    style RabbitMQ fill:#9ff,stroke:#333,stroke-width:2px

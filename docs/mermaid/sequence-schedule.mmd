@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Programador
+    participant Schedule
+    participant DataManager
+    participant CKAN
+    participant DKAN
+    participant Socrata
+
+    Programador->>Schedule: Define intervalo de sincronização
+    Schedule->>DataManager: POST para iniciar sincronização
+    DataManager->>CKAN: Busca dados
+    DataManager->>DKAN: Busca dados
+    DataManager->>Socrata: Busca dados
+    CKAN-->>DataManager: Dados retornados
+    DKAN-->>DataManager: Dados retornados
+    Socrata-->>DataManager: Dados retornados
