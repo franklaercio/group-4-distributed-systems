@@ -55,8 +55,8 @@ Siga os passos abaixo para configurar o ambiente e executar o projeto:
 
 2. Instale as dependências:
     ```sh
-    # Exemplo para um projeto Java com Maven
     mvn clean install
+    ```
 
 ## Execução
 
@@ -64,13 +64,11 @@ Para executar o projeto, siga os passos abaixo:
 
 1. Inicie o servidor:
     ```sh
-    # Exemplo para um projeto Java
     java -cp target/group-4-distributed-systems.jar br.ufrn.manager
     ```
 
 2. Inicie os clientes:
     ```sh
-    # Exemplo para um projeto Java
     java -cp target/group-4-distributed-systems.jar br.ufrn.manager.Application
     ```
 
@@ -85,7 +83,6 @@ Para executar o projeto, siga os passos abaixo:
 Para garantir a qualidade do código, o projeto inclui testes unitários e de integração. Para executar os testes, utilize o seguinte comando:
 
 ```sh
-# Exemplo para um projeto Java com Maven
 mvn test
 ```
 
