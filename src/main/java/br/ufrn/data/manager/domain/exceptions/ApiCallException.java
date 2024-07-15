@@ -1,4 +1,4 @@
-package br.ufrn.schedule;
+package br.ufrn.data.manager.domain.exceptions;
 
 public class ApiCallException extends Exception {
 

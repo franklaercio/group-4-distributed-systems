@@ -17,17 +17,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queue() {
-        return new Queue(messageQueueProperties.getCkanQueueName(), true);
-    }
-
-    @Bean
-    public Queue dkanQueue() {
-        return new Queue(messageQueueProperties.getCkanQueueName(), true);
-    }
-
-    @Bean
-    public Queue socrataQueue() {
-        return new Queue(messageQueueProperties.getCkanQueueName(), true);
+        return new Queue(messageQueueProperties.getOpenDataQueueName(), true);
     }
 
     @Bean

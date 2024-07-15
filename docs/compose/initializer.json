@@ -2,7 +2,7 @@
   {
     "httpRequest": {
       "method": "POST",
-      "path": "/api/v1/cache"
+      "path": "/api/v1/opendata/cache"
     },
     "httpResponse": {
       "body": {
@@ -14,7 +14,7 @@
   {
     "httpRequest": {
       "method": "GET",
-      "path": "/api/v1/socrata"
+      "path": "/api/v1/opendata/socrata"
     },
     "httpResponse": {
       "body": {
@@ -30,7 +30,7 @@
   {
     "httpRequest": {
       "method": "GET",
-      "path": "/api/v1/ckan"
+      "path": "/api/v1/opendata/ckan"
     },
     "httpResponse": {
       "body": {
@@ -46,7 +46,7 @@
   {
     "httpRequest": {
       "method": "GET",
-      "path": "/api/v1/dkan"
+      "path": "/api/v1/opendata/dkan"
     },
     "httpResponse": {
       "body": {

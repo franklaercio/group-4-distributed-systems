@@ -1,5 +1,6 @@
-package br.ufrn.schedule;
+package br.ufrn.data.manager.schedule;
 
+import br.ufrn.data.manager.services.DataSyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,29 +9,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTasks {
 
-    private final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
 
-    private final OpenDataService openDataService;
+    private final DataSyncService dataSyncService;
 
-    public ScheduledTasks(OpenDataService openDataService) {
-        this.openDataService = openDataService;
+    public ScheduledTasks(DataSyncService dataSyncService) {
+        this.dataSyncService = dataSyncService;
     }
 
     @Scheduled(cron = "0 * * * * *") // every minute
-    public void callCkan() throws ApiCallException {
-        logger.info("Calling CKAN");
-        this.openDataService.callApi("/api/v1/opendata");
+    public void callOpenDataApis() {
+        syncOpenData("CKAN", "ckan");
+        syncOpenData("DKAN", "dkan");
+        syncOpenData("Socrata", "socrata");
     }
 
-    @Scheduled(cron = "0 * * * * *") // every minute
-    public void callDkan() throws ApiCallException {
-        logger.info("Calling DKAN");
-        this.openDataService.callApi("/api/v1/opendata");
-    }
-
-    @Scheduled(cron = "0 * * * * *") // every minute
-    public void callSocrata() throws ApiCallException {
-        logger.info("Calling Socrata");
-        this.openDataService.callApi("/api/v1/opendata");
+    private void syncOpenData(String apiName, String apiUrl) {
+        logger.info("Starting calling {}", apiName);
+        this.dataSyncService.sync(apiUrl);
     }
 }

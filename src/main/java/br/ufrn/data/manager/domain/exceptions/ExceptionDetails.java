@@ -1,4 +1,4 @@
-package br.ufrn.data.manager.model.exceptions;
+package br.ufrn.data.manager.domain.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
