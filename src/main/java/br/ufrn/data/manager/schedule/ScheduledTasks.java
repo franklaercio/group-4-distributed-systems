@@ -33,7 +33,7 @@ public class ScheduledTasks {
             dataSyncService.sync(routingKey, datasource);
             logger.info("Call to {} completed successfully", datasource);
         } catch (Exception ex) {
-            logger.error("Error trying to update datasource {}. Please contact the responsible group to fix it.", datasource, ex);
+            logger.error("Error trying to update datasource {}. Please contact the responsible group to fix it.", datasource);
         }
     }
 }
