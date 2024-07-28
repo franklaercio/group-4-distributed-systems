@@ -1,5 +1,6 @@
 package br.ufrn.data.manager.services;
 
+import br.ufrn.data.manager.infrastructure.configs.RabbitMQProperties;
 import br.ufrn.data.manager.repositories.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,17 +13,21 @@ public class MessageService implements MessageRepository {
     private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
 
     private final RabbitTemplate rabbitTemplate;
+    private final RabbitMQProperties rabbitMQProperties;
 
-    @Value("${rabbitmq.exchange}")
-    private String exchangeName;
-
-    public MessageService(RabbitTemplate rabbitTemplate) {
+    public MessageService(RabbitTemplate rabbitTemplate, RabbitMQProperties rabbitMQProperties) {
         this.rabbitTemplate = rabbitTemplate;
+        this.rabbitMQProperties = rabbitMQProperties;
     }
 
     @Override
-    public void send(String queue, Object message) {
-        this.rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
-        logger.info("Message sent to queue {}: {}", queue, message);
+    public void send(String routingKey, Object message) {
+        try {
+            rabbitTemplate.convertAndSend(rabbitMQProperties.getExchangeName(), routingKey, message);
+            logger.info("Message sent to queue with routing key {}: {}", routingKey, message);
+        } catch (Exception ex) {
+            logger.error("Failed to send message to queue with routing key {}: {}", routingKey, message);
+            throw new RuntimeException("Failed to send message to queue with routing key " + routingKey, ex);
+        }
     }
 }
