@@ -1,68 +1,52 @@
 package br.ufrn.data.manager.infrastructure.configs;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.exchange}")
-    private String exchangeName;
-
-    @Value("${rabbitmq.queue.ckan}")
-    private String ckanQueueName;
-
-    @Value("${rabbitmq.queue.dkan}")
-    private String dkanQueueName;
-
-    @Value("${rabbitmq.queue.socrata}")
-    private String socrataQueueName;
-
-    @Value("${rabbitmq.routingkey.ckan}")
-    private String ckanRoutingKey;
-
-    @Value("${rabbitmq.routingkey.dkan}")
-    private String dkanRoutingKey;
-
-    @Value("${rabbitmq.routingkey.socrata}")
-    private String socrataRoutingKey;
+    @Autowired
+    private RabbitMQProperties rabbitMQProperties;
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange(exchangeName);
+        return new DirectExchange(rabbitMQProperties.getExchangeName());
     }
 
     @Bean
     public Queue ckanQueue() {
-        return new Queue(ckanQueueName);
+        return new Queue(rabbitMQProperties.getCkanQueueName());
     }
 
     @Bean
     public Queue dkanQueue() {
-        return new Queue(dkanQueueName);
+        return new Queue(rabbitMQProperties.getDkanQueueName());
     }
 
     @Bean
     public Queue socrataQueue() {
-        return new Queue(socrataQueueName);
+        return new Queue(rabbitMQProperties.getSocrataQueueName());
     }
 
     @Bean
     public Binding ckanBinding(Queue ckanQueue, DirectExchange exchange) {
-        return BindingBuilder.bind(ckanQueue).to(exchange).with(ckanRoutingKey);
+        return BindingBuilder.bind(ckanQueue).to(exchange).with(rabbitMQProperties.getCkanRoutingKey());
     }
 
     @Bean
     public Binding dkanBinding(Queue dkanQueue, DirectExchange exchange) {
-        return BindingBuilder.bind(dkanQueue).to(exchange).with(dkanRoutingKey);
+        return BindingBuilder.bind(dkanQueue).to(exchange).with(rabbitMQProperties.getDkanRoutingKey());
     }
 
     @Bean
     public Binding socrataBinding(Queue socrataQueue, DirectExchange exchange) {
-        return BindingBuilder.bind(socrataQueue).to(exchange).with(socrataRoutingKey);
+        return BindingBuilder.bind(socrataQueue).to(exchange).with(rabbitMQProperties.getSocrataRoutingKey());
     }
 }
 

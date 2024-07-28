@@ -2,5 +2,5 @@ package br.ufrn.data.manager.repositories;
 
 public interface ScheduleRepository {
 
-    void sync(String datasource);
+    void sync(String routingKey, String datasource);
 }
