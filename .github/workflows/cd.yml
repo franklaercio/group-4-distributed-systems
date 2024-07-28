@@ -29,4 +29,4 @@ jobs:
         -e RABBITMQ_PORT=${{ secrets.RABBITMQ_PORT }} \
         -e RABBITMQ_USERNAME=${{ secrets.RABBITMQ_USERNAME }} \
         -e RABBITMQ_PASSWORD=${{ secrets.RABBITMQ_PASSWORD }} \
-        $DOCKER_USERNAME/data-manager:latest
+        ${{ secrets.DOCKER_USERNAME }}/data-manager:latest
