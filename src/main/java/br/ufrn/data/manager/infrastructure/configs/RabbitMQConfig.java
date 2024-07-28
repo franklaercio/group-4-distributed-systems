@@ -9,20 +9,60 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    private final MessageQueueProperties messageQueueProperties;
+    @Value("${rabbitmq.exchange}")
+    private String exchangeName;
 
-    public RabbitMQConfig(MessageQueueProperties messageQueueProperties) {
-        this.messageQueueProperties = messageQueueProperties;
+    @Value("${rabbitmq.queue.ckan}")
+    private String ckanQueueName;
+
+    @Value("${rabbitmq.queue.dkan}")
+    private String dkanQueueName;
+
+    @Value("${rabbitmq.queue.socrata}")
+    private String socrataQueueName;
+
+    @Value("${rabbitmq.routingkey.ckan}")
+    private String ckanRoutingKey;
+
+    @Value("${rabbitmq.routingkey.dkan}")
+    private String dkanRoutingKey;
+
+    @Value("${rabbitmq.routingkey.socrata}")
+    private String socrataRoutingKey;
+
+    @Bean
+    public DirectExchange directExchange() {
+        return new DirectExchange(exchangeName);
     }
 
     @Bean
-    public Queue queue() {
-        return new Queue(messageQueueProperties.getOpenDataQueueName(), true);
+    public Queue ckanQueue() {
+        return new Queue(ckanQueueName);
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
-        return new RabbitTemplate(connectionFactory);
+    public Queue dkanQueue() {
+        return new Queue(dkanQueueName);
+    }
+
+    @Bean
+    public Queue socrataQueue() {
+        return new Queue(socrataQueueName);
+    }
+
+    @Bean
+    public Binding ckanBinding(Queue ckanQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(ckanQueue).to(exchange).with(ckanRoutingKey);
+    }
+
+    @Bean
+    public Binding dkanBinding(Queue dkanQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(dkanQueue).to(exchange).with(dkanRoutingKey);
+    }
+
+    @Bean
+    public Binding socrataBinding(Queue socrataQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(socrataQueue).to(exchange).with(socrataRoutingKey);
     }
 }
 
