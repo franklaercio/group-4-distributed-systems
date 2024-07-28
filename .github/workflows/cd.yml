@@ -13,9 +13,23 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    - name: Check out the repo
+    - uses: actions/checkout@v2
+
     - name: Pull Docker image
-      run: sudo docker pull franklaercio/data-manager:latest
+      run: sudo docker pull $DOCKER_USERNAME/data-manager:latest
+
     - name: Delete Old docker container
       run: sudo docker rm -f data-manager || true
+
     - name: Run Docker Container
-      run: sudo docker run -d -p 8080:8080 --name data-manager franklaercio/data-manager
+      run: |
+        sudo docker run -d -p 8080:8080 \
+        --name data-manager \
+        -e API_EXTERNAL_ACCESS_DATA_URL=${{ secrets.API_EXTERNAL_ACCESS_DATA_URL }} \
+        -e API_EXTERNAL_CACHE_URL=${{ secrets.API_EXTERNAL_CACHE_URL }} \
+        -e RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }} \
+        -e RABBITMQ_PORT=${{ secrets.RABBITMQ_PORT }} \
+        -e RABBITMQ_USERNAME=${{ secrets.RABBITMQ_USERNAME }} \
+        -e RABBITMQ_PASSWORD=${{ secrets.RABBITMQ_PASSWORD }} \
+        $DOCKER_USERNAME/data-manager:latest

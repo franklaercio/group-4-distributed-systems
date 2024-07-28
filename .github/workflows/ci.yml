@@ -20,7 +20,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       
     - name: Build Docker image
-      run: docker build --build-arg API_EXTERNAL_ACCESS_DATA_URL=${{ secrets.API_EXTERNAL_ACCESS_DATA_URL }} --build-arg API_EXTERNAL_CACHE_URL=${{ secrets.API_EXTERNAL_CACHE_URL }} --build-arg RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }} --build-arg RABBITMQ_PORT=${{ secrets.RABBITMQ_PORT }} --build-arg RABBITMQ_USERNAME=${{ secrets.RABBITMQ_USERNAME }} --build-arg RABBITMQ_PASSWORD=${{ secrets.RABBITMQ_PASSWORD }} -t $DOCKER_USERNAME/data-manager .
+      run: docker build -t $DOCKER_USERNAME/data-manager .
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       
