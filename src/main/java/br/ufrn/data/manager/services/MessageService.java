@@ -13,13 +13,16 @@ public class MessageService implements MessageRepository {
 
     private final RabbitTemplate rabbitTemplate;
 
+    @Value("${rabbitmq.exchange}")
+    private String exchangeName;
+
     public MessageService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
     public void send(String queue, Object message) {
-        this.rabbitTemplate.convertAndSend(queue, message);
-        logger.info("Data sent to queue {}: {}", queue, message);
+        this.rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
+        logger.info("Message sent to queue {}: {}", queue, message);
     }
 }

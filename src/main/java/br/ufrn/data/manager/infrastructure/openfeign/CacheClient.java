@@ -5,9 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(url = "${external.api.cache.url}", name = "cache-client", path = "/api/v1/opendata")
+@FeignClient(url = "${external.api.cache.url}", name = "cache-client", path = "/cache")
 public interface CacheClient {
 
-    @PostMapping("/cache")
+    @PostMapping
     ResponseEntity<Void> createCache(OpenDataEntity openDataEntity);
 }
