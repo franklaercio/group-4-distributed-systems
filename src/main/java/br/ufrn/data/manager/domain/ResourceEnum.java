@@ -1,5 +1,5 @@
 package br.ufrn.data.manager.domain;
 
-public enum DatabaseEntity {
+public enum ResourceEnum {
     CKAN, DKAN, SOCRATA
 }

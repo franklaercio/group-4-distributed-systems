@@ -1,5 +1,6 @@
 package br.ufrn.data.manager.schedule;
 
+import br.ufrn.data.manager.domain.ResourceEnum;
 import br.ufrn.data.manager.infrastructure.configs.RabbitMQProperties;
 import br.ufrn.data.manager.services.DataSyncService;
 import org.slf4j.Logger;
@@ -22,18 +23,18 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 * * * * *") // every minute
     public void callOpenDataApis() {
-        syncOpenData(rabbitMQProperties.getCkanRoutingKey(), "ckan");
-        syncOpenData(rabbitMQProperties.getDkanRoutingKey(), "dkan");
-        syncOpenData(rabbitMQProperties.getSocrataRoutingKey(), "socrata");
+        syncOpenData(rabbitMQProperties.getCkanRoutingKey(), ResourceEnum.CKAN.name());
+//        syncOpenData(rabbitMQProperties.getDkanRoutingKey(), "dkan");
+//        syncOpenData(rabbitMQProperties.getSocrataRoutingKey(), "socrata");
     }
 
-    private void syncOpenData(String routingKey, String datasource) {
+    private void syncOpenData(String routingKey, String resource) {
         try {
-            logger.info("Starting call to {}", datasource);
-            dataSyncService.sync(routingKey, datasource);
-            logger.info("Call to {} completed successfully", datasource);
+            logger.info("Starting call to {}", resource);
+            dataSyncService.sync(routingKey, resource);
+            logger.info("Call to {} completed successfully", resource);
         } catch (Exception ex) {
-            logger.error("Error trying to update datasource {}. Please contact the responsible group to fix it.", datasource, ex);
+            logger.error("Error trying to update resource {}. Please contact the responsible group to fix it.", resource);
         }
     }
 }
