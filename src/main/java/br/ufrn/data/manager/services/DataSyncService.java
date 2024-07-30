@@ -29,7 +29,9 @@ public class DataSyncService implements ScheduleRepository {
     @Override
     public void sync(String routingKey, String datasource) {
         try {
-            OpenDataEntity accessDataResponse = openAccessClient.getData(datasource);
+            OpenDataEntity accessDataResponse = new OpenAccessClient();
+            accessDataResponse.setId(UUID.randomUUID().toString());
+
             logger.info("Data fetched from {} successfully: {}", datasource, accessDataResponse);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(accessDataResponse);
