@@ -11,6 +11,8 @@ public class OpenDataEntity {
 
     private ResourceEnum resourceEnum;
 
+    public OpenDataEntity() {}
+
     public OpenDataEntity(Object data, ResourceEnum resourceEnum) {
         this.data = data;
         this.resourceEnum = resourceEnum;

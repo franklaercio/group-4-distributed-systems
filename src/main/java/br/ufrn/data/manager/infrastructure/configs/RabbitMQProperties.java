@@ -18,6 +18,9 @@ public class RabbitMQProperties {
     @Value("${rabbitmq.queue.socrata}")
     private String socrataQueueName;
 
+    @Value("${rabbitmq.queue.teste}")
+    private String testeQueueName;
+
     @Value("${rabbitmq.routingkey.ckan}")
     private String ckanRoutingKey;
 
