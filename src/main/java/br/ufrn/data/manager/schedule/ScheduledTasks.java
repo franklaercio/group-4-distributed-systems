@@ -23,7 +23,8 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 * * * * *") // every minute
     public void callOpenDataApis() {
-        syncOpenData(rabbitMQProperties.getCkanRoutingKey(), ResourceEnum.CKAN.name());
+        //syncOpenData(rabbitMQProperties.getCkanRoutingKey(), ResourceEnum.CKAN.name());
+        syncOpenData(rabbitMQProperties.getTesteQueueName(), "teste");
 //        syncOpenData(rabbitMQProperties.getDkanRoutingKey(), "dkan");
 //        syncOpenData(rabbitMQProperties.getSocrataRoutingKey(), "socrata");
     }

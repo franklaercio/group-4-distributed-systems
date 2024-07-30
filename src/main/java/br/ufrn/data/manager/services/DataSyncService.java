@@ -29,7 +29,7 @@ public class DataSyncService implements ScheduleRepository {
     @Override
     public void sync(String routingKey, String datasource) {
         try {
-            OpenDataEntity accessDataResponse = new OpenAccessClient();
+            OpenDataEntity accessDataResponse = new OpenDataEntity();
             accessDataResponse.setId(UUID.randomUUID().toString());
 
             logger.info("Data fetched from {} successfully: {}", datasource, accessDataResponse);
