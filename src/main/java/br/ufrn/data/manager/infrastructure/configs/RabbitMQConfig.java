@@ -35,6 +35,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue testeQueue() {
+        return new Queue(rabbitMQProperties.getTesteQueueName());
+    }
+
+    @Bean
     public Binding ckanBinding(Queue ckanQueue, DirectExchange exchange) {
         return BindingBuilder.bind(ckanQueue).to(exchange).with(rabbitMQProperties.getCkanRoutingKey());
     }
@@ -47,6 +52,11 @@ public class RabbitMQConfig {
     @Bean
     public Binding socrataBinding(Queue socrataQueue, DirectExchange exchange) {
         return BindingBuilder.bind(socrataQueue).to(exchange).with(rabbitMQProperties.getSocrataRoutingKey());
+    }
+
+    @Bean
+    public Binding testeBinding(Queue testeQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(testeQueue).to(exchange).with(rabbitMQProperties.getTesteRoutingKey());
     }
 }
 
