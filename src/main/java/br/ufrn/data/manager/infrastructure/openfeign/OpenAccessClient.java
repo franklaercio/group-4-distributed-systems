@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(url = "${external.api.access.data.url}", name = "access-data-client", path = "/api")
 public interface OpenAccessClient {
 
-    @GetMapping("/resource/{datasource}}")
+    @GetMapping("/resource/{datasource}")
     OpenDataEntity getData(@PathVariable String datasource);
 
 }
