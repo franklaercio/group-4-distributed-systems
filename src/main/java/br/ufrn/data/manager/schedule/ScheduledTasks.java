@@ -31,7 +31,7 @@ public class ScheduledTasks {
     private void syncOpenData(String routingKey, ResourceEnum resource) {
         try {
             logger.info("Starting call to {}", resource);
-            dataSyncService.sync(routingKey, resource);
+            dataSyncService.sync(routingKey, resource.name());
             logger.info("Call to {} completed successfully", resource);
         } catch (Exception ex) {
             logger.error("Error trying to update resource {}. Please contact the responsible group to fix it.", resource);
