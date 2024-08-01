@@ -1,6 +1,7 @@
 package br.ufrn.data.manager.services;
 
 import br.ufrn.data.manager.domain.OpenDataEntity;
+import br.ufrn.data.manager.domain.ResourceEnum;
 import br.ufrn.data.manager.domain.exceptions.CacheCreationException;
 import br.ufrn.data.manager.infrastructure.openfeign.CacheClient;
 import br.ufrn.data.manager.infrastructure.openfeign.OpenAccessClient;
@@ -29,11 +30,9 @@ public class DataSyncService implements ScheduleRepository {
     }
 
     @Override
-    public void sync(String routingKey, String datasource) {
+    public void sync(String routingKey, ResourceEnum datasource) {
         try {
-            OpenDataEntity accessDataResponse = new OpenDataEntity();
-            accessDataResponse.setId(UUID.randomUUID().toString());
-
+            OpenDataEntity accessDataResponse = openAccessClient.getData(datasource);
             logger.info("Data fetched from {} successfully: {}", datasource, accessDataResponse);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(accessDataResponse);
@@ -45,7 +44,7 @@ public class DataSyncService implements ScheduleRepository {
             messageRepository.send(routingKey, accessDataResponse.getData());
             logger.info("Data from {} sent to message queue with routing key {}", datasource, routingKey);
         } catch (Exception ex) {
-            logger.error("An error occurred while syncing data from {}", datasource);
+            logger.error("An error occurred while syncing data from {}", datasource, ex);
             throw new RuntimeException("Data sync failed for datasource: " + datasource, ex);
         }
     }
