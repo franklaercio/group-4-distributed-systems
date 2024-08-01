@@ -51,7 +51,7 @@ public class DataSyncService implements ScheduleRepository {
             messageRepository.send(routingKey, openData.getData());
             logger.info("Data from {} sent to message queue with routing key {}", datasource, routingKey);
         } catch (Exception ex) {
-            logger.error("An error occurred while syncing data from {}", datasource);
+            logger.error("An error occurred while syncing data from {}", datasource, ex);
             throw new RuntimeException("Data sync failed for datasource: " + datasource, ex);
         }
     }
