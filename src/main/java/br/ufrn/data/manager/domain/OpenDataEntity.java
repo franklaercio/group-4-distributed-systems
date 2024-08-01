@@ -9,14 +9,9 @@ public class OpenDataEntity {
 
     private Object data;
 
-    private ResourceEnum resourceEnum;
+    private String database;
 
     public OpenDataEntity() {}
-
-    public OpenDataEntity(Object data, ResourceEnum resourceEnum) {
-        this.data = data;
-        this.resourceEnum = resourceEnum;
-    }
 
     public String getId() {
         return id;
@@ -30,20 +25,20 @@ public class OpenDataEntity {
         return data;
     }
 
-    public ResourceEnum getDatabase() {
-        return resourceEnum;
+    public String getDatabase() {
+        return database;
     }
 
     public void setData(Object data) {
         this.data = data;
     }
 
-    public void setDatabase(ResourceEnum resourceEnum) {
-        this.resourceEnum = resourceEnum;
+    public void setDatabase(String database) {
+        this.database = database;
     }
 
     @Override
     public String toString() {
-        return "{" + "\"id\":" + id + "," + "\"resourceEnum\":" + resourceEnum + "," + "\"data\":" + data + "}";
+        return "{" + "\"id\":" + id + "," + "\"database\":" + database + "," + "\"data\":" + data + "}";
     }
 }
