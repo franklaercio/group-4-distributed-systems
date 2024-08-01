@@ -59,4 +59,15 @@ public class Tax {
     public void setYear(String year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return "Tax{" +
+                "id=" + id +
+                ", month='" + month + '\'' +
+                ", taxType='" + taxType + '\'' +
+                ", value=" + value +
+                ", year='" + year + '\'' +
+                '}';
+    }
 }

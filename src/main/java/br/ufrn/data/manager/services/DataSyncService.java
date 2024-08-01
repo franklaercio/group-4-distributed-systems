@@ -40,6 +40,7 @@ public class DataSyncService implements ScheduleRepository {
         try {
             OpenDataEntity openData = taxService.getRandomTax(datasource);
             logger.info("Data fetched from {} successfully: {}", datasource, openData);
+            logger.info("Token: {}", token);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(token, openData);
             if (!cacheResponse.getStatusCode().is2xxSuccessful()) {
