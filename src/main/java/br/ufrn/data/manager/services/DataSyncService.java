@@ -25,7 +25,7 @@ public class DataSyncService implements ScheduleRepository {
     private final CacheClient cacheClient;
     private final MessageRepository messageRepository;
 
-    @Value("${internal.token")
+    @Value("${internal.token}")
     private String token;
 
     public DataSyncService(OpenAccessClient openAccessClient, TaxService taxService, CacheClient cacheClient, MessageRepository messageRepository) {
