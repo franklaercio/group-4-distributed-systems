@@ -30,7 +30,7 @@ public class DataSyncService implements ScheduleRepository {
     }
 
     @Override
-    public void sync(String routingKey, ResourceEnum datasource) {
+    public void sync(String routingKey, String datasource) {
         try {
             OpenDataEntity accessDataResponse = openAccessClient.getData(datasource);
             logger.info("Data fetched from {} successfully: {}", datasource, accessDataResponse);
