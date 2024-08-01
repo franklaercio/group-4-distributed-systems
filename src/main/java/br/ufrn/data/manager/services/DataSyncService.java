@@ -38,7 +38,7 @@ public class DataSyncService implements ScheduleRepository {
     @Override
     public void sync(String routingKey, String datasource) {
         try {
-            OpenDataEntity openData = taxService.getRandomTax(datasource.name());
+            OpenDataEntity openData = taxService.getRandomTax(datasource);
             logger.info("Data fetched from {} successfully: {}", datasource, openData);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(token, openData);
