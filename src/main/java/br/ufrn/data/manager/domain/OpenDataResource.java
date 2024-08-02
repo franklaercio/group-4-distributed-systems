@@ -3,7 +3,7 @@ package br.ufrn.data.manager.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OpenDataEntity {
+public class OpenDataResource {
 
     private String id;
 
@@ -11,7 +11,7 @@ public class OpenDataEntity {
 
     private String database;
 
-    public OpenDataEntity() {}
+    public OpenDataResource() {}
 
     public String getId() {
         return id;

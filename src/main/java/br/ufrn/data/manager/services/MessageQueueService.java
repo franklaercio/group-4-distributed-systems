@@ -1,27 +1,24 @@
 package br.ufrn.data.manager.services;
 
-import br.ufrn.data.manager.infrastructure.configs.RabbitMQProperties;
-import br.ufrn.data.manager.repositories.MessageRepository;
+import br.ufrn.data.manager.repositories.MessageQueueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageService implements MessageRepository {
+public class MessageQueueService implements MessageQueueRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessageQueueService.class);
 
     private final RabbitTemplate rabbitTemplate;
-    private final RabbitMQProperties rabbitMQProperties;
 
-    public MessageService(RabbitTemplate rabbitTemplate, RabbitMQProperties rabbitMQProperties) {
+    public MessageQueueService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-        this.rabbitMQProperties = rabbitMQProperties;
     }
 
     @Override
-    public void send(String routingKey, Object message) {
+    public void sendMessage(String routingKey, Object message) {
         try {
             rabbitTemplate.convertAndSend(routingKey, message);
             logger.info("Message sent to queue with routing key {}: {}", routingKey, message);

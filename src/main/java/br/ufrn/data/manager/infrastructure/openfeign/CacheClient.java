@@ -1,6 +1,6 @@
 package br.ufrn.data.manager.infrastructure.openfeign;
 
-import br.ufrn.data.manager.domain.OpenDataEntity;
+import br.ufrn.data.manager.domain.OpenDataResource;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +11,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface CacheClient {
 
     @PostMapping("/api/v1/cache")
-    ResponseEntity<Void> createCache(@RequestHeader("X-Application-Token") String token,
-                     @RequestBody OpenDataEntity openData);
+    ResponseEntity<Void> createCache(@RequestHeader("X-Application-Token") String token, @RequestBody OpenDataResource openDataResource);
 }
