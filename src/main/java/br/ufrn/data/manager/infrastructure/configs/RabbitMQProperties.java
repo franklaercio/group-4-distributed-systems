@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQProperties {
 
-    @Value("${rabbitmq.exchange}")
-    private String exchangeName;
-
     @Value("${rabbitmq.queue.ckan}")
     private String ckanQueueName;
 
@@ -18,9 +15,6 @@ public class RabbitMQProperties {
     @Value("${rabbitmq.queue.socrata}")
     private String socrataQueueName;
 
-    @Value("${rabbitmq.queue.teste}")
-    private String testeQueueName;
-
     @Value("${rabbitmq.routingkey.ckan}")
     private String ckanRoutingKey;
 
@@ -29,17 +23,6 @@ public class RabbitMQProperties {
 
     @Value("${rabbitmq.routingkey.socrata}")
     private String socrataRoutingKey;
-
-    @Value("${rabbitmq.routingkey.teste}")
-    private String testeRoutingKey;
-
-    public String getExchangeName() {
-        return exchangeName;
-    }
-
-    public void setExchangeName(String exchangeName) {
-        this.exchangeName = exchangeName;
-    }
 
     public String getCkanQueueName() {
         return ckanQueueName;
@@ -65,14 +48,6 @@ public class RabbitMQProperties {
         this.socrataQueueName = socrataQueueName;
     }
 
-    public String getTesteQueueName() {
-        return testeQueueName;
-    }
-
-    public void setTesteQueueName(String testeQueueName) {
-        this.testeQueueName = testeQueueName;
-    }
-
     public String getCkanRoutingKey() {
         return ckanRoutingKey;
     }
@@ -95,13 +70,5 @@ public class RabbitMQProperties {
 
     public void setSocrataRoutingKey(String socrataRoutingKey) {
         this.socrataRoutingKey = socrataRoutingKey;
-    }
-
-    public String getTesteRoutingKey() {
-        return testeRoutingKey;
-    }
-
-    public void setTesteRoutingKey(String testeRoutingKey) {
-        this.testeRoutingKey = testeRoutingKey;
     }
 }
