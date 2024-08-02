@@ -7,7 +7,7 @@ public class OpenDataEntity {
 
     private String id;
 
-    private Object data;
+    private String data;
 
     private String database;
 
@@ -29,7 +29,7 @@ public class OpenDataEntity {
         return database;
     }
 
-    public void setData(Object data) {
+    public void setData(String data) {
         this.data = data;
     }
 
