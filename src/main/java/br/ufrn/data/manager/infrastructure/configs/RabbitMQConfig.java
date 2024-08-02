@@ -1,9 +1,8 @@
 package br.ufrn.data.manager.infrastructure.configs;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,18 @@ public class RabbitMQConfig {
     private RabbitMQProperties rabbitMQProperties;
 
     @Bean
+    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+        return new RabbitTemplate(connectionFactory);
+    }
+
+    @Bean
     public DirectExchange directExchange() {
         return new DirectExchange(rabbitMQProperties.getExchangeName());
+    }
+
+    @Bean
+    public Exchange exchange() {
+        return ExchangeBuilder.directExchange(rabbitMQProperties.getExchangeName()).durable(true).build();
     }
 
     @Bean
