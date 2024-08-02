@@ -39,7 +39,7 @@ public class DataSyncService implements ScheduleRepository {
     public void sync(String routingKey, String datasource) {
         try {
             OpenDataEntity openData = openAccessClient.getData(datasource);
-            logger.info("Data fetched from {} successfully: {}", datasource, openData);
+            logger.info("Data fetched from {} successfully", datasource);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(token, openData);
             if (!cacheResponse.getStatusCode().is2xxSuccessful()) {

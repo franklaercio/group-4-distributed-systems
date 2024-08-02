@@ -1,7 +1,6 @@
 package br.ufrn.data.manager.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +30,7 @@ public class OpenDataEntity {
         this.id = id;
     }
 
-    public Object getData() {
+    public String getData() {
         return data;
     }
 
