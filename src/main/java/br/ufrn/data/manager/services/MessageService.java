@@ -23,7 +23,7 @@ public class MessageService implements MessageRepository {
     @Override
     public void send(String routingKey, Object message) {
         try {
-            rabbitTemplate.convertAndSend(rabbitMQProperties.getExchangeName(), routingKey, message);
+            rabbitTemplate.convertAndSend(routingKey, message);
             logger.info("Message sent to queue with routing key {}: {}", routingKey, message);
         } catch (Exception ex) {
             logger.error("Failed to send message to queue with routing key {}: {}", routingKey, message);
