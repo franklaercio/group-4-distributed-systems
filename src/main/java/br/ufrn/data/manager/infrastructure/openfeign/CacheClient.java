@@ -7,6 +7,7 @@ import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @Headers("X-Application-Token: {token}")
@@ -14,5 +15,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface CacheClient {
 
     @PostMapping
-    ResponseEntity<Void> createCache(@Param("token") String token, OpenDataEntity openDataEntity);
+    ResponseEntity<Void> createCache(@Param("token") String token, @RequestBody OpenDataEntity openDataEntity);
 }
