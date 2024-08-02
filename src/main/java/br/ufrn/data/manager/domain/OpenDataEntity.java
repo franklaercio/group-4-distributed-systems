@@ -1,21 +1,13 @@
 package br.ufrn.data.manager.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import java.io.IOException;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenDataEntity {
 
     private String id;
 
-    private String data;
+    private Object data;
 
     private String database;
 
@@ -29,7 +21,7 @@ public class OpenDataEntity {
         this.id = id;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
@@ -37,14 +29,8 @@ public class OpenDataEntity {
         return database;
     }
 
-    public void setData(String data) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            this.data = mapper.writeValueAsString(data);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            this.data = null;
-        }
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public void setDatabase(String database) {
