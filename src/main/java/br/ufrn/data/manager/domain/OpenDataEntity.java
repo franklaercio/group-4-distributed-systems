@@ -1,6 +1,7 @@
 package br.ufrn.data.manager.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +15,6 @@ public class OpenDataEntity {
 
     private String id;
 
-    @JsonDeserialize(using = JsonToStringDeserializer.class)
-    @JsonSerialize(using = JsonToStringSerializer.class)
     private String data;
 
     private String database;
@@ -39,7 +38,13 @@ public class OpenDataEntity {
     }
 
     public void setData(String data) {
-        this.data = data;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            this.data = mapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            this.data = null;
+        }
     }
 
     public void setDatabase(String database) {
@@ -49,28 +54,5 @@ public class OpenDataEntity {
     @Override
     public String toString() {
         return "{" + "\"id\":" + id + "," + "\"database\":" + database + "," + "\"data\":" + data + "}";
-    }
-}
-
-class JsonToStringDeserializer extends JsonDeserializer<String> {
-
-    @Override
-    public String deserialize(com.fasterxml.jackson.core.JsonParser jsonParser, com.fasterxml.jackson.databind.DeserializationContext deserializationContext) {
-        ObjectMapper mapper = new ObjectMapper();
-        Object json = null;
-        try {
-            json = mapper.readTree(jsonParser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return json.toString();
-    }
-}
-
-class JsonToStringSerializer extends JsonSerializer<String> {
-
-    @Override
-    public void serialize(String value, com.fasterxml.jackson.core.JsonGenerator jsonGenerator, com.fasterxml.jackson.databind.SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeRawValue(value);
     }
 }
