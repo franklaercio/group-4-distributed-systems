@@ -30,7 +30,7 @@ public class TaxService {
         OpenDataEntity openData = new OpenDataEntity();
         openData.setId(UUID.randomUUID().toString());
         openData.setDatabase(datasource.toLowerCase());
-        openData.setData(taxInfoList.get(index));
+        openData.setData("teste");
 
         return openData;
     }
