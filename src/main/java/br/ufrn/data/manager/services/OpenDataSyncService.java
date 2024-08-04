@@ -34,7 +34,7 @@ public class OpenDataSyncService implements DataSyncRepository {
     public void synchronizeData(String routingKey, String datasource) {
         try {
             OpenDataResource openDataResource = openDataClient.getData(datasource);
-            logger.info("Data fetched from {} successfully: {}", datasource, openDataResource);
+            logger.info("Data fetched from {} successfully", datasource);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(token, openDataResource);
             if (!cacheResponse.getStatusCode().is2xxSuccessful()) {

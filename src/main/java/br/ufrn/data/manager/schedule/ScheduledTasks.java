@@ -21,12 +21,11 @@ public class ScheduledTasks {
         this.rabbitMQProperties = rabbitMQProperties;
     }
 
-//    @Scheduled(cron = "0 */10 * * * *") // every 10 minutes
-    @Scheduled(cron = "0 * * * * *") // every 10 minutes
+    @Scheduled(cron = "0 */10 * * * *") // every 10 minutes
     public void callOpenDataApis() {
         syncOpenData(rabbitMQProperties.getCkanRoutingKey(), ResourceEnum.CKAN);
 //        syncOpenData(rabbitMQProperties.getDkanRoutingKey(), "dkan");
-//        syncOpenData(rabbitMQProperties.getSocrataRoutingKey(), ResourceEnum.SOCRATA);
+        syncOpenData(rabbitMQProperties.getSocrataRoutingKey(), ResourceEnum.SOCRATA);
     }
 
     private void syncOpenData(String routingKey, ResourceEnum resource) {
