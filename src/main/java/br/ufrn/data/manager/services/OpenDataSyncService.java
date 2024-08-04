@@ -34,7 +34,7 @@ public class OpenDataSyncService implements DataSyncRepository {
     public void synchronizeData(String routingKey, String datasource) {
         try {
             OpenDataResource openDataResource = openDataClient.getData(datasource);
-            logger.info("Data fetched from {} successfully", datasource);
+            logger.info("Data fetched from {} successfully: {}", datasource, openDataResource);
 
             ResponseEntity<Void> cacheResponse = cacheClient.createCache(token, openDataResource);
             if (!cacheResponse.getStatusCode().is2xxSuccessful()) {
@@ -46,7 +46,7 @@ public class OpenDataSyncService implements DataSyncRepository {
             messageQueueRepository.sendMessage(routingKey, openDataResource.getId());
             logger.info("Data from {} sent to message queue with routing key {}", datasource, routingKey);
         } catch (Exception ex) {
-            logger.error("An error occurred while syncing data from {}", datasource, ex);
+            logger.error("An error occurred while syncing data from {}", datasource);
             throw new RuntimeException("Data sync failed for datasource: " + datasource, ex);
         }
     }
